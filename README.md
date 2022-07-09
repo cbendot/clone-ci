@@ -1,0 +1,1 @@
+[![AOSP Clang](https://github.com/cbendot/llvm-builder/actions/workflows/clone.yml/badge.svg?branch=main)](https://github.com/cbendot/llvm-builder/actions/workflows/clone.yml)
