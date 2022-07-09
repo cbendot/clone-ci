@@ -1,0 +1,23 @@
+name: AOSP Clang
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    container: 
+      image: xyzuan/xdocker:latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Clang Cloning
+      env:
+        GITLAB_TOKEN_EMAIL: ${{ secrets.GITLAB_TOKEN_EMAIL }}
+        GITLAB_TOKEN_USERNAME: ${{ secrets.GITLAB_TOKEN_USERNAME }}
+        GITLAB_TOKEN_TOKEN: ${{ secrets.GITLAB_TOKEN_TOKEN }}
+        GITLAB_TOKEN_PUSH_REPO_URL: ${{ secrets.GITLAB_TOKEN_PUSH_REPO_URL }}
+      run: |
+        bash clone

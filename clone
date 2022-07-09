@@ -1,0 +1,35 @@
+#! /bin/bash
+# Copyright ©2022 merayukalbu
+# Just a simple script for auto push aosp-clang
+
+# Function to show an informational message
+msg() {
+    echo -e "\e[1;32m$*\e[0m"
+}
+
+  git config --global user.email "r.budhiono@gmail.com"
+  git config --global user.name "ben863"
+  
+# Set a directory
+export DIR="$(pwd ...)"
+
+# set a clang version
+export CLANG_VERSION="clang-r450784e"  # See latest from https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/heads/master
+  
+mkdir ${DIR}/tmp
+cd ${DIR}/tmp
+
+msg "Start Cloning ..."
+wget --quiet https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/${CLANG_VERSION}.tgz
+tar -xf ${CLANG_VERSION}.tgz
+rm -rf ${CLANG_VERSION}.tgz
+
+git clone "https://$GITLAB_TOKEN_USERNAME:$GITLAB_TOKEN_TOKEN@$GITLAB_TOKEN_PUSH_REPO_URL" ${DIR}/push
+rm -rf ${DIR}/push/*
+cp -rf ${DIR}/tmp/* ${DIR}/push/
+
+cd ${DIR}/push/
+git add .
+git commit -s --quiet -m "Import AOSP Clang from https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/${CLANG_VERSION}"
+git lfs migrate import --include="*git"
+git push origin
