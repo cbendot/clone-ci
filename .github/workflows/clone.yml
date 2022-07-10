@@ -1,7 +1,6 @@
 name: AOSP Clang
 
 on: 
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
