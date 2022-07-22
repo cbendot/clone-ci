@@ -32,10 +32,5 @@ cd ${DIR}/push/
 git add .
 git commit -s --quiet -m "Import Latest AOSP Clang from https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/${CLANG_VERSION}"
 git lfs migrate import --everything --include="*git"
-git lfs migrate import --everything --include="bin/clang-check"
-git lfs migrate import --everything --include="bin/lld"
-git lfs migrate import --everything --include="lib64/libLLVM-14git.so"
-git lfs migrate import --everything --include="bin/clang-14"
-git lfs migrate import --everything --include="lib64/libclang.so.13"
 
 git push -f origin
